@@ -51,5 +51,8 @@ public class EtudiantRESTController {
 	public List<Etudiant> getEtudiantsByIdI(@PathVariable("idI") Long idI) {
 	return etudiantService.findByInstitutIdI(idI);
 	}
-
+	@RequestMapping(value="/etud/{nom}",method = RequestMethod.GET)
+	public List<Etudiant> findByNomContains(@PathVariable("nom") String nom) {
+	return etudiantService.findByNomContains(nom);
+	}
 }
