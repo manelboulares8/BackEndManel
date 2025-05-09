@@ -21,7 +21,8 @@ public class InstitutRestController {
 	@Autowired
 	InstitutRepository institutRepository;
 	
-	@RequestMapping(method=RequestMethod.GET)
+	//@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(path="/allIns",method = RequestMethod.GET)
 	List <Institut> getAllInstituts(){
 		return institutRepository.findAll();
 		

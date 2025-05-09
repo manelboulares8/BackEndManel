@@ -3,6 +3,7 @@ package com.manel.etudiant.restcontrollers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,28 +22,29 @@ public class EtudiantRESTController {
 	@Autowired
 	EtudiantService etudiantService;
 	
-	@RequestMapping(method=RequestMethod.GET)
+	@RequestMapping(path="all",method=RequestMethod.GET)
 	List <Etudiant> getAllEtudiants(){
 		return etudiantService.getAllEtudiants();
 		
 		
 	}
-	@RequestMapping(value="/{id}",method = RequestMethod.GET)
+	@RequestMapping(value="/getbyid/{id}",method = RequestMethod.GET)
 	public Etudiant getEtudiantById(@PathVariable("id") Long id) {
 	return etudiantService.getEtudiant(id);
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT)
+	@RequestMapping(path="/updateetud",method = RequestMethod.PUT)
 	public Etudiant updateEtudiant(@RequestBody Etudiant etudiant) {
 	return etudiantService.updateEtudiant(etudiant);
 	}
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(path="/addetud",method = RequestMethod.POST)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public Etudiant createEtudiant(@RequestBody Etudiant etudiant) {
 	return etudiantService.saveEtudiant(etudiant);
 	}
 	
-	@RequestMapping(value="/{id}",method = RequestMethod.DELETE)
+	@RequestMapping(value="/deleteeud/{id}",method = RequestMethod.DELETE)
 	public void deleteEtudiant(@PathVariable("id") Long id)
 	{
 	etudiantService.deleteEtudiantById(id);
