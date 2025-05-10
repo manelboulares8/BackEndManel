@@ -29,11 +29,13 @@ public class EtudiantRESTController {
 		
 	}
 	@RequestMapping(value="/getbyid/{id}",method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public Etudiant getEtudiantById(@PathVariable("id") Long id) {
 	return etudiantService.getEtudiant(id);
 	}
 	
 	@RequestMapping(path="/updateetud",method = RequestMethod.PUT)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public Etudiant updateEtudiant(@RequestBody Etudiant etudiant) {
 	return etudiantService.updateEtudiant(etudiant);
 	}
@@ -44,16 +46,19 @@ public class EtudiantRESTController {
 	return etudiantService.saveEtudiant(etudiant);
 	}
 	
-	@RequestMapping(value="/deleteeud/{id}",method = RequestMethod.DELETE)
+	@RequestMapping(value="/deleteetud/{id}",method = RequestMethod.DELETE)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public void deleteEtudiant(@PathVariable("id") Long id)
 	{
 	etudiantService.deleteEtudiantById(id);
 	}
 	@RequestMapping(value="/etudsIns/{idI}",method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public List<Etudiant> getEtudiantsByIdI(@PathVariable("idI") Long idI) {
 	return etudiantService.findByInstitutIdI(idI);
 	}
 	@RequestMapping(value="/etud/{nom}",method = RequestMethod.GET)
+	@PreAuthorize("hasAuthority('ADMIN')")
 	public List<Etudiant> findByNomContains(@PathVariable("nom") String nom) {
 	return etudiantService.findByNomContains(nom);
 	}

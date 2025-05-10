@@ -50,6 +50,14 @@ public class SecurityConfig {
 	//.requestMatchers(HttpMethod.POST,"/api/addetud/**").hasAnyAuthority("ADMIN") 
 	.requestMatchers(HttpMethod.PUT,"/api/updateetud/**").hasAuthority("ADMIN") 
 	.requestMatchers(HttpMethod.DELETE,"/api/deleteetud/**").hasAuthority("ADMIN") 
+	.requestMatchers(HttpMethod.DELETE,"/api/ins/**").hasAuthority("ADMIN") 
+	.requestMatchers(HttpMethod.POST,"/api/ins/addInstitut").hasAuthority("ADMIN") 
+	.requestMatchers(HttpMethod.PUT,"/api/ins/**").hasAuthority("ADMIN") 
+	.requestMatchers(HttpMethod.PUT,"/etudsIns/**").hasAuthority("ADMIN") 
+	.requestMatchers(HttpMethod.PUT,"/etud/**").hasAuthority("ADMIN") 
+
+
+
 	.anyRequest().authenticated() ) 
 	 
 	.addFilterBefore(new JWTAuthorizationFilter(), 
